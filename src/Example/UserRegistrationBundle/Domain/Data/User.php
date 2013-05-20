@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * User
  *
- * @ORM\Table()
+ * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="Example\UserRegistrationBundle\Domain\Data\UserRepository")
  */
 class User
@@ -24,14 +24,14 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="lastName", type="string", length=255)
+     * @ORM\Column(name="last_name", type="string", length=255)
      */
     private $lastName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="firstName", type="string", length=255)
+     * @ORM\Column(name="first_name", type="string", length=255)
      */
     private $firstName;
 
@@ -52,35 +52,35 @@ class User
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="registrationDate", type="datetime")
+     * @ORM\Column(name="registration_date", type="datetime")
      */
     private $registrationDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="activationDate", type="datetime")
+     * @ORM\Column(name="activation_date", type="datetime")
      */
     private $activationDate;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="activationKey", type="string", length=255)
+     * @ORM\Column(name="activation_key", type="string", length=255)
      */
     private $activationKey;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdAt", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updatedAt", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
