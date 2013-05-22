@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="Example\UserRegistrationBundle\Domain\Data\UserRepository")
+ * @ORM\HasLifeCycleCallback()
  */
 class User
 {
@@ -300,5 +301,21 @@ class User
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updatedAt = new \DateTime();
     }
 }
