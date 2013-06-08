@@ -1,3 +1,8 @@
 parameters:
+    example.user_registration_service.class: Example\UserRegistrationBundle\Domain\Service\UserRegistrationService
 
 services:
+    example.user_registration:
+        class: %example.user_registration_service.class%
+        arguments: [@doctrine.orm.entity_manager]
+    
