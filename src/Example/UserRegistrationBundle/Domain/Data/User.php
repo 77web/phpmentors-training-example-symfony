@@ -85,6 +85,7 @@ class User
      */
     private $updatedAt;
 
+    const SALT = 'ThisTokenIsNotSecret';
 
     /**
      * Get id
