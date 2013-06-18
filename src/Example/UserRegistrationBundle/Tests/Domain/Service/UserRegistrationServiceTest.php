@@ -34,7 +34,7 @@ class UserRegistrationServiceTest extends TestCase
         \Phake::verify($encoder)->encodePassword($this->isType(\PHPUnit_Framework_Constraint_IsType::TYPE_STRING), $this->isType(\PHPUnit_Framework_Constraint_IsType::TYPE_STRING));
         \Phake::verify($user)->setPassword($this->isType(\PHPUnit_Framework_Constraint_IsType::TYPE_STRING));
         \Phake::verify($user)->setRegistrationDate($this->isInstanceOf('DateTime'));
-        \Phake::verify($userRepository)->add($user);
+        \Phake::verify($userRepository)->add($this->identicalTo($user));
         \Phake::verify($em)->flush();
     }
 }
