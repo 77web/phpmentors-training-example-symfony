@@ -12,4 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
+    /**
+     * @param User $user
+     */
+    public function add(User $user)
+    {
+        $this->getEntityManager()->persist($user);
+    }
 }

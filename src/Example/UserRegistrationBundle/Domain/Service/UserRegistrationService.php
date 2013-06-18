@@ -21,7 +21,7 @@ class UserRegistrationService
     {
         //アクティベーションって何するの？
 
-        $this->entityManager->persist($user);
+        $this->entityManager->getRepository('Example\UserRegistrationBundle\Domain\Data\User')->add($user);
         $this->entityManager->flush();
     }
 }
