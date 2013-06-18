@@ -10,18 +10,18 @@ class UserRegistrationService
     /**
      * @var \Doctrine\ORM\EntityManager
      */
-    private $em;
+    private $entityManager;
 
     public function __construct(EntityManager $entityManager)
     {
-        $this->em = $entityManager;
+        $this->entityManager = $entityManager;
     }
 
     public function register(User $user)
     {
         //アクティベーションって何するの？
 
-        $this->em->persist($user);
-        $this->em->flush();
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
     }
 }
