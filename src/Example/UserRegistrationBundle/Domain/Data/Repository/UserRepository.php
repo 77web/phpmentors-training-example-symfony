@@ -1,8 +1,9 @@
 <?php
 
-namespace Example\UserRegistrationBundle\Domain\Data;
+namespace Example\UserRegistrationBundle\Domain\Data\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Example\UserRegistrationBundle\Domain\Data\User;
 
 /**
  * UserRepository

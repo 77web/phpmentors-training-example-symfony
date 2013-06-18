@@ -13,7 +13,7 @@ class UserRegistrationServiceTest extends TestCase
         $password = 'test';
         $activationKey = 'activationkey';
 
-        $userRepository = \Phake::mock('Example\UserRegistrationBundle\Domain\Data\UserRepository');
+        $userRepository = \Phake::mock('Example\UserRegistrationBundle\Domain\Data\Repository\UserRepository');
         \Phake::when($em)->getRepository('Example\UserRegistrationBundle\Domain\Data\User')->thenReturn($userRepository);
 
         $encoder = \Phake::mock('Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface');
