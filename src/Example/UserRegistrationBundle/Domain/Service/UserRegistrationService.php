@@ -36,10 +36,14 @@ class UserRegistrationService
         $this->secureRandom = $secureRandom;
     }
 
+    /**
+     * @param User $user
+     */
     public function register(User $user)
     {
         $user->setActivationKey(base64_encode($this->secureRandom->nextBytes(24)));
         $user->setPassword($this->passwordEncoder->encodePassword($user->getPassword(), User::SALT));
+        $user->setRegistrationDate(new \DateTime());
 
         $this->entityManager->getRepository('Example\UserRegistrationBundle\Domain\Data\User')->add($user);
         $this->entityManager->flush();
