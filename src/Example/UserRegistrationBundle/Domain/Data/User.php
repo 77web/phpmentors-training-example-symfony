@@ -8,8 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * User
  *
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="Example\UserRegistrationBundle\Domain\Data\UserRepository")
- * @ORM\HasLifeCycleCallback()
+ * @ORM\Entity(repositoryClass="Example\UserRegistrationBundle\Domain\Data\Repository\UserRepository")
+ * @ORM\HasLifeCycleCallbacks
  */
 class User
 {
@@ -60,7 +60,7 @@ class User
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="activation_date", type="datetime")
+     * @ORM\Column(name="activation_date", type="datetime", nullable=true)
      */
     private $activationDate;
 
@@ -314,6 +314,7 @@ class User
 
     /**
      * @ORM\PreUpdate
+     * @ORM\PrePersist
      */
     public function onPreUpdate()
     {
