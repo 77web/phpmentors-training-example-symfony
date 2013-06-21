@@ -41,4 +41,29 @@ class UserRegistrationServiceTest extends TestCase
         \Phake::verify($em)->flush();
         \Phake::verify($userTransfer)->sendActivationMail($this->identicalTo($user));
     }
+
+    public function testActivateUser()
+    {
+        $activationKey = 'activation_key';
+        $em = \Phake::mock('Doctrine\ORM\EntityManager');
+        $user = \Phake::mock('Example\UserRegistrationBundle\Domain\Data\User');
+        $userRepository = \Phake::mock('Example\UserRegistrationBundle\Domain\Data\Repository\UserRepository');
+
+        \Phake::when($em)->getRepository('Example\UserRegistrationBundle\Domain\Data\User')->thenReturn($userRepository);
+        \Phake::whenCallMethodWith('findOneByActivationKey', array($activationKey))->isCalledOn($userRepository)->thenReturn($user);
+        \Phake::when($user)->getActivationDate()->thenReturn(null);
+
+        $encoder = \Phake::mock('Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface');
+        $secureRandom = \Phake::mock('Symfony\Component\Security\Core\Util\SecureRandomInterface');
+        $userTransfer = \Phake::mock('Example\UserRegistrationBundle\Domain\Transfer\UserTransfer');
+
+        $registrationService = new UserRegistrationService($em, $encoder, $secureRandom, $userTransfer);
+        $registrationService->activate($activationKey);
+
+        \Phake::verify($userRepository)->findOneByActivationKey($this->isType(\PHPUnit_Framework_Constraint_IsType::TYPE_STRING));
+        \Phake::verify($user)->getActivationDate();
+        \Phake::verify($user)->setActivationDate($this->isInstanceOf('DateTime'));
+        \Phake::verify($em)->persist($this->identicalTo($user));
+        \Phake::verify($em)->flush();
+    }
 }
