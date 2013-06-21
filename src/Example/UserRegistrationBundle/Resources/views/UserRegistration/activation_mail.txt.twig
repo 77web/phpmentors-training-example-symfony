@@ -1,0 +1,5 @@
+{{ user.lastName }} {{ user.firstName }}様
+
+登録を完了するには下記URLをクリックしてください。
+
+{{ url('user_activation', { 'key': user.activationKey }) }}
