@@ -41,5 +41,8 @@ class TestUserRegistrationCommand extends ContainerAwareCommand
         $userRegistrationService->register($user);
 
         $output->writeln('Registration complete for user:'.$user->getId());
+
+        $userRegistrationService->activate($user->getActivationKey());
+        $output->writeln('Activation complete for user:'.$user->getId());
     }
 }
