@@ -59,4 +59,26 @@ class UserRegistrationService
             throw new \Exception('Could not send activation mail.');
         }
     }
+
+    /**
+     * @param string $activationKey
+     * @throws \Exception
+     */
+    public function activate($activationKey)
+    {
+        $user = $this->entityManager->getRepository('Example\UserRegistrationBundle\Domain\Data\User')->findOneByActivationKey($activationKey);
+        if (!$user) {
+            throw new \Exception('Could not find proper user.');
+        }
+
+        if ($user->getActivationDate()) {
+            throw new \Exception('User has been already activated.');
+        }
+
+        $user->setActivationDate(new \DateTime());
+        $user->setActivationKey('');
+
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+    }
 }
