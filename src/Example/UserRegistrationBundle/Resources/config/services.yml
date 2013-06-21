@@ -1,6 +1,7 @@
 parameters:
     example.user_registration_user.class: Example\UserRegistrationBundle\Domain\Data\User
     example.user_registration_service.class: Example\UserRegistrationBundle\Domain\Service\UserRegistrationService
+    example.user_registration_transfer.class: Example\UserRegistrationBundle\Domain\Transfer\UserTransfer
 
 services:
     example.user_registration.password_encoder:
@@ -14,3 +15,6 @@ services:
         class: %example.user_registration_service.class%
         arguments: [@doctrine.orm.entity_manager, @example.user_registration.password_encoder, @security.secure_random]
     
+    example.user_registration.transfer:
+        class: %example.user_registration_transfer.class%
+        arguments: [@mailer, @templating]
