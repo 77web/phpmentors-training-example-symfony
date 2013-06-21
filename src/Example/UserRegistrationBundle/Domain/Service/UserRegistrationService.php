@@ -68,11 +68,11 @@ class UserRegistrationService
     {
         $user = $this->entityManager->getRepository('Example\UserRegistrationBundle\Domain\Data\User')->findOneByActivationKey($activationKey);
         if (is_null($user)) {
-            throw new \Exception('Could not find proper user.');
+            throw new \UnexpectedValueException('Could not find proper user.');
         }
 
         if (!is_null($user->getActivationDate())) {
-            throw new \Exception('User has been already activated.');
+            throw new \UnexpectedValueException('User has been already activated.');
         }
 
         $user->setActivationDate(new \DateTime());
