@@ -18,7 +18,7 @@ class ExampleUserRegistrationBundle extends Bundle
                     ->register('mime.qpheaderencoder')
                     ->asAliasOf('mime.base64headerencoder')
                 ;
-                \Swift_Preference::getInstance()->setCharset('iso-2022-jp');
+                \Swift_Preferences::getInstance()->setCharset('iso-2022-jp');
             });
     }
 }

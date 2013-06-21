@@ -4,6 +4,7 @@ namespace Example\UserRegistrationBundle\Domain\Service;
 
 use Doctrine\ORM\EntityManager;
 use Example\UserRegistrationBundle\Domain\Data\User;
+use Example\UserRegistrationBundle\Domain\Transfer\UserTransfer;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Util\SecureRandomInterface;
 
@@ -25,15 +26,21 @@ class UserRegistrationService
     private $secureRandom;
 
     /**
+     * @var UserTransfer
+     */
+    private $userTransfer;
+
+    /**
      * @param EntityManager $entityManager
      * @param PasswordEncoderInterface $passwordEncoder
      * @param SecureRandomInterface $secureRandom
      */
-    public function __construct(EntityManager $entityManager, PasswordEncoderInterface $passwordEncoder, SecureRandomInterface $secureRandom)
+    public function __construct(EntityManager $entityManager, PasswordEncoderInterface $passwordEncoder, SecureRandomInterface $secureRandom, UserTransfer $userTransfer)
     {
         $this->entityManager = $entityManager;
         $this->passwordEncoder = $passwordEncoder;
         $this->secureRandom = $secureRandom;
+        $this->userTransfer = $userTransfer;
     }
 
     /**
@@ -47,5 +54,9 @@ class UserRegistrationService
 
         $this->entityManager->getRepository('Example\UserRegistrationBundle\Domain\Data\User')->add($user);
         $this->entityManager->flush();
+
+        if (!$this->userTransfer->sendActivationMail($user)) {
+            throw new \Exception('Could not send activation mail.');
+        }
     }
 }
