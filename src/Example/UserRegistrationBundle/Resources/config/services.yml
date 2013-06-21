@@ -11,10 +11,13 @@ services:
         arguments:
             - "%example.user_registration_user.class%"
 
+    example.user_registration.transfer.message_factory:
+        class: Swift_Message
+
     example.user_registration:
         class: %example.user_registration_service.class%
-        arguments: [@doctrine.orm.entity_manager, @example.user_registration.password_encoder, @security.secure_random]
+        arguments: [@doctrine.orm.entity_manager, @example.user_registration.password_encoder, @security.secure_random, @example.user_registration.transfer]
     
     example.user_registration.transfer:
         class: %example.user_registration_transfer.class%
-        arguments: [@mailer, @templating]
+        arguments: [@mailer, @example.user_registration.transfer.message_factory, @twig]
