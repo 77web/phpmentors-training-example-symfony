@@ -25,7 +25,10 @@ class UserRegistrationServiceTest extends TestCase
         $user = \Phake::mock('Example\UserRegistrationBundle\Domain\Data\User');
         \Phake::when($user)->getPassword()->thenReturn($password);
 
-        $registrationService = new UserRegistrationService($em, $encoder, $secureRandom);
+        $userTransfer = \Phake::mock('Example\UserRegistrationBundle\Domain\Transfer\UserTransfer');
+        \Phake::when($userTransfer)->sendActivationMail($this->anything())->thenReturn(true);
+
+        $registrationService = new UserRegistrationService($em, $encoder, $secureRandom, $userTransfer);
         $registrationService->register($user);
 
         \Phake::verify($secureRandom)->nextBytes($this->isType(\PHPUnit_Framework_Constraint_IsType::TYPE_INT));
@@ -36,5 +39,6 @@ class UserRegistrationServiceTest extends TestCase
         \Phake::verify($user)->setRegistrationDate($this->isInstanceOf('DateTime'));
         \Phake::verify($userRepository)->add($this->identicalTo($user));
         \Phake::verify($em)->flush();
+        \Phake::verify($userTransfer)->sendActivationMail($this->identicalTo($user));
     }
 }
