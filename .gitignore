@@ -9,3 +9,4 @@
 /app/phpunit.xml
 /app/config/parameters.yml
 /.idea
+/phpunit.phar
