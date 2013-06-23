@@ -17,7 +17,7 @@ class UserActivationController extends Controller
      * @param Request $request
      * @return array
      */
-    public function doAction(Request $request)
+    public function activationAction(Request $request)
     {
         $activationKey = $request->query->get('key');
 

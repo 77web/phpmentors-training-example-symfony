@@ -26,7 +26,7 @@ class UserActivationControllerTest extends WebTestCase
 
     }
 
-    public function testDo()
+    public function testActivation()
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/users/activation/?key=test');
