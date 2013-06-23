@@ -20,9 +20,13 @@
         </tr>
     </tbody>
 </table>
-<form action="{{ path('register_do') }}" method="post">
-    {{ form_widget(form) }}
-    <button type="submit" class="btn btn-primary" name="next">登録する</button>
-    <button type="submit" class="btn" name="prev">修正する</button>
-</form>
+<div class="wel">
+    <form action="{{ path('register_do') }}" method="post">
+        {{ form_widget(form) }}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary" name="next">登録する</button>
+            <button type="submit" class="btn" name="prev">修正する</button>
+        </div>
+    </form>
+</div>
 {% endblock %}
