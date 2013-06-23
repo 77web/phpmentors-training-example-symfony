@@ -2,7 +2,8 @@
 
 namespace Example\UserRegistrationBundle\Controller;
 
-use Example\UserRegistrationBundle\Form\UserType;
+use Example\UserRegistrationBundle\Domain\Factory\UserFactory;
+use Example\UserRegistrationBundle\Form\Type\UserRegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -105,7 +106,9 @@ class UserRegistrationController extends Controller
 
     private function createRegistrationForm()
     {
-        return $this->createForm(new UserType());
+        $userFactory = new UserFactory();
+
+        return $this->createForm(new UserRegistrationType(), $userFactory->create());
     }
 
     private function createCSRFForm()
