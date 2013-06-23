@@ -4,8 +4,12 @@
 
 {% block content %}
 <h2>ユーザー情報の入力</h2>
-<form action="{{ path('register_post') }}" method="post">
-    {{ form_widget(form) }}
-    <button type="submit" class="btn">次へ</button>
-</form>
+<div class="well">
+    <form action="{{ path('register_post') }}" method="post">
+        {{ form_widget(form) }}
+        <div class="form-actions">
+            <button type="submit" class="btn">次へ</button>
+        </div>
+    </form>
+</div>
 {% endblock %}
