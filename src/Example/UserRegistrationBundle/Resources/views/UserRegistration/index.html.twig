@@ -1,1 +1,4 @@
-Hello {{ name }}!
+<form action="{{ path('register_do') }}" method="post">
+    {{ form_widget(form) }}
+    <button type="submit" class="btn">登録</button>
+</form>
