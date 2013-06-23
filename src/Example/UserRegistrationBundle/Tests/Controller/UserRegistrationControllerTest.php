@@ -10,7 +10,7 @@ class UserRegistrationControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/');
+        $crawler = $client->request('GET', '/users/registration/');
 
         $this->assertEquals(1, $crawler->filter('form')->count());
         $this->assertEquals(1, $crawler->filter('#user_firstName')->count());
@@ -23,7 +23,7 @@ class UserRegistrationControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/');
+        $crawler = $client->request('GET', '/users/registration/');
         $form = $crawler->selectButton('次へ')->form();
         $client->submit($form, array('user' => array(
                 'firstName' => 'Hiromi',
