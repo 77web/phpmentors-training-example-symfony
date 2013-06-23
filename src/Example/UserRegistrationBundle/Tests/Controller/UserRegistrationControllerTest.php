@@ -6,6 +6,20 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserRegistrationControllerTest extends WebTestCase
 {
+    public function setUp()
+    {
+        $client = static::createClient();
+
+        $em = $client->getContainer()->get('doctrine')->getManager();
+        $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
+
+        $classes = array(
+            $em->getClassMetadata('Example\UserRegistrationBundle\Domain\Data\User'),
+        );
+        $tool->dropDatabase();
+        $tool->createSchema($classes);
+    }
+
     public function testIndex()
     {
         $client = static::createClient();
@@ -49,4 +63,12 @@ class UserRegistrationControllerTest extends WebTestCase
         $this->assertEquals(1, $crawler->filter('p:contains("登録が完了しました。")')->count());
     }
 
+    public function tearDown()
+    {
+        $client = static::createClient();
+
+        $em = $client->getContainer()->get('doctrine')->getManager();
+        $tool = new \Doctrine\ORM\Tools\SchemaTool($em);
+        $tool->dropDatabase();
+    }
 }

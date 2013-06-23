@@ -3,6 +3,7 @@
 namespace Example\UserRegistrationBundle\Domain\Data;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -11,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="Example\UserRegistrationBundle\Domain\Data\Repository\UserRepository")
  * @ORM\HasLifeCycleCallbacks
+ * @UniqueEntity(fields="email", message="このメールアドレスは既に使われています。", groups={"registration"})
  */
 class User
 {
