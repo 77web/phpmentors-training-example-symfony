@@ -82,7 +82,7 @@ class UserRegistrationController extends Controller
 
         $user = $this->get('session')->get('user_data');
 
-        if (!$form->isValid() || null === $user) {
+        if (!$form->isValid() || null === $user || $request->request->has('prev')) {
             return $this->redirect($this->generateUrl('register'));
         }
 

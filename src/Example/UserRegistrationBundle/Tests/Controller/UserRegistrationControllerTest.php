@@ -37,7 +37,7 @@ class UserRegistrationControllerTest extends WebTestCase
         $crawler = $client->followRedirect();
         $this->assertEquals(1, $crawler->filter('table td:contains("Hishida Hiromi")')->count());
         $this->assertEquals(1, $crawler->filter('table td:contains("info@77-web.com")')->count());
-        $form = $crawler->selectButton('登録')->form();
+        $form = $crawler->selectButton('登録する')->form();
         $client->submit($form);
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\RedirectResponse', $client->getResponse());
 

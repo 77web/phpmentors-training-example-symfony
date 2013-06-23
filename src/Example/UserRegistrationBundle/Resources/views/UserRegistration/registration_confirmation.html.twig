@@ -17,5 +17,6 @@
 </table>
 <form action="{{ path('register_do') }}" method="post">
     {{ form_widget(form) }}
-    <button type="submit" class="btn">登録</button>
+    <button type="submit" class="btn btn-primary" name="next">登録する</button>
+    <button type="submit" class="btn" name="prev">修正する</button>
 </form>
