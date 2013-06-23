@@ -16,7 +16,7 @@ class UserRegistrationController extends Controller
      * @Method("GET")
      * @Template("ExampleUserRegistrationBundle:UserRegistration:registration_input.html.twig")
      */
-    public function indexAction()
+    public function inputAction()
     {
         $form = $this->createRegistrationForm();
 
@@ -32,7 +32,7 @@ class UserRegistrationController extends Controller
      * @param Request $request
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function postAction(Request $request)
+    public function inputPostAction(Request $request)
     {
         $form = $this->createRegistrationForm();
         $form->bind($request);
@@ -55,7 +55,7 @@ class UserRegistrationController extends Controller
      * @Template("ExampleUserRegistrationBundle:UserRegistration:registration_confirmation.html.twig")
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function confirmAction()
+    public function confirmationAction()
     {
         $user = $this->get('session')->get('user_data');
         if (null === $user) {
@@ -75,7 +75,7 @@ class UserRegistrationController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function doAction(Request $request)
+    public function confirmationPostAction(Request $request)
     {
         $form = $this->createCSRFForm();
         $form->bind($request);
