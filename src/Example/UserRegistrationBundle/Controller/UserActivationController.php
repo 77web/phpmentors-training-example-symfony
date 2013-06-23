@@ -17,11 +17,12 @@ class UserActivationController extends Controller
      * @param Request $request
      * @return array
      */
-    public function doAction(Request $request)
+    public function activationAction(Request $request)
     {
         $activationKey = $request->query->get('key');
 
         try {
+            $this->get('example.user_registration')->activate($activationKey);
         } catch (\UnexpectedValueException $e) {
             return $this->redirect($this->generateUrl('register'));
         }
