@@ -24,27 +24,68 @@ class UserRegistrationController extends Controller
     }
 
     /**
-     * @Route("/do", name="register_do")
+     * @Route("/post", name="register_post")
      * @Template("ExampleUserRegistrationBundle:UserRegistration:registration_input.html.twig")
      * @param Request $request
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function doAction(Request $request)
+    public function postAction(Request $request)
     {
         $form = $this->createRegistrationForm();
         $form->bind($request);
 
-        if ($form->isValid()) {
-            $user = $form->getData();
-            $this->getRegistrationService()->register($user);
+        if ($form->isValid())
+        {
+            $this->get('session')->set('user_data', $form->getData());
 
-            return $this->redirect($this->generateUrl('register_success'));
+            return $this->redirect($this->generateUrl('register_confirm'));
         }
 
         return array(
             'form' => $form->createView(),
         );
     }
+
+    /**
+     * @Route("/confirm", name="register_confirm")
+     * @Template("ExampleUserRegistrationBundle:UserRegistration:registration_confirmation.html.twig")
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function confirmAction()
+    {
+        $user = $this->get('session')->get('user_data');
+        if (null === $user) {
+            return $this->redirect($this->generateUrl('register'));
+        }
+        $form = $this->createCSRFForm();
+
+        return array(
+            'user' => $user,
+            'form' => $form->createView(),
+        );
+    }
+
+    /**
+     * @Route("/do", name="register_do")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function doAction(Request $request)
+    {
+        $form = $this->createCSRFForm();
+        $form->bind($request);
+
+        $user = $this->get('session')->get('user_data');
+
+        if (!$form->isValid() || null === $user) {
+            return $this->redirect($this->generateUrl('register'));
+        }
+
+        $this->getRegistrationService()->register($user);
+
+        return $this->redirect($this->generateUrl('register_success'));
+    }
+
 
     /**
      * @Route("/success", name="register_success")
@@ -59,6 +100,11 @@ class UserRegistrationController extends Controller
     private function createRegistrationForm()
     {
         return $this->createForm(new UserType());
+    }
+
+    private function createCSRFForm()
+    {
+        return $this->createFormBuilder()->getForm();
     }
 
     private function getRegistrationService()

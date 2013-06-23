@@ -1,0 +1,20 @@
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <th>お名前</th>
+            <td>{{ user.lastName }} {{ user.firstName }}</td>
+        </tr>
+        <tr>
+            <th>メールアドレス</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>パスワード</th>
+            <td>****</td>
+        </tr>
+    </tbody>
+</table>
+<form action="{{ path('register_do') }}" method="post">
+    {{ form_widget(form) }}
+    <button type="submit" class="btn">登録</button>
+</form>
