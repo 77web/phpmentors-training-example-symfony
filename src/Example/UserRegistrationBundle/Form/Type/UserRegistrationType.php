@@ -32,7 +32,8 @@ class UserRegistrationType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Example\UserRegistrationBundle\Domain\Data\User'
+            'data_class' => 'Example\UserRegistrationBundle\Domain\Data\User',
+            'validation_groups' => array('registration'),
         ));
     }
 
