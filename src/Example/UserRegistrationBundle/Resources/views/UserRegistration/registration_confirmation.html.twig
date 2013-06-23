@@ -1,3 +1,8 @@
+{% extends 'ExampleUserRegistrationBundle::layout.html.twig' %}
+
+{% block title %}登録内容の確認{% endblock %}
+
+{% block content %}
 <h2>登録内容の確認</h2>
 <table class="table table-bordered">
     <tbody>
@@ -20,3 +25,4 @@
     <button type="submit" class="btn btn-primary" name="next">登録する</button>
     <button type="submit" class="btn" name="prev">修正する</button>
 </form>
+{% endblock %}
