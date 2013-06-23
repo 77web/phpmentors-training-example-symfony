@@ -12,7 +12,7 @@ class UserRegistrationController extends Controller
 {
     /**
      * @Route("/", name="register")
-     * @Template()
+     * @Template("ExampleUserRegistrationBundle:UserRegistration:registration_input.html.twig")
      */
     public function indexAction()
     {
@@ -25,7 +25,7 @@ class UserRegistrationController extends Controller
 
     /**
      * @Route("/do", name="register_do")
-     * @Template("ExampleUserRegistrationBundle:UserRegistration:index.html.twig")
+     * @Template("ExampleUserRegistrationBundle:UserRegistration:registration_input.html.twig")
      * @param Request $request
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -48,7 +48,7 @@ class UserRegistrationController extends Controller
 
     /**
      * @Route("/success", name="register_success")
-     * @Template()
+     * @Template("ExampleUserRegistrationBundle:UserRegistration:registration_success.html.twig")
      * @return array
      */
     public function successAction()
