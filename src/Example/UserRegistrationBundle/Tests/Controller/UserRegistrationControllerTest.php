@@ -16,7 +16,8 @@ class UserRegistrationControllerTest extends WebTestCase
         $this->assertEquals(1, $crawler->filter('#user_firstName')->count());
         $this->assertEquals(1, $crawler->filter('#user_lastName')->count());
         $this->assertEquals(1, $crawler->filter('#user_email')->count());
-        $this->assertEquals(1, $crawler->filter('#user_password')->count());
+        $this->assertEquals(1, $crawler->filter('#user_password_password')->count());
+        $this->assertEquals(1, $crawler->filter('#user_password_confirmation_password')->count());
     }
 
     public function testUserRegistrationFlow()
@@ -29,7 +30,10 @@ class UserRegistrationControllerTest extends WebTestCase
                 'firstName' => 'Hiromi',
                 'lastName' => 'Hishida',
                 'email' => 'info@77-web.com',
-                'password' => 'password',
+                'password' => array(
+                    'password' => 'password',
+                    'confirmation_password' => 'password',
+                ),
             )));
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\RedirectResponse', $client->getResponse());
 

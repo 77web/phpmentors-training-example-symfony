@@ -14,7 +14,18 @@ class UserRegistrationType extends AbstractType
             ->add('lastName')
             ->add('firstName')
             ->add('email')
-            ->add('password')
+            ->add('password', 'repeated', array(
+                    'type' => 'password',
+                    'first_name' => 'password',
+                    'second_name' => 'confirmation_password',
+                    'invalid_message' => 'パスワードが確認用パスワードと一致しません。',
+                    'first_options' => array(
+                        'label' => 'パスワード',
+                    ),
+                    'second_options' => array(
+                        'label' => '確認用パスワード',
+                    ),
+                ))
         ;
     }
 
