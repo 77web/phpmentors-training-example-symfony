@@ -22,6 +22,7 @@ class UserActivationController extends Controller
         $activationKey = $request->query->get('key');
 
         try {
+            $this->get('example.user_registration')->activate($activationKey);
         } catch (\UnexpectedValueException $e) {
             return $this->redirect($this->generateUrl('register'));
         }
