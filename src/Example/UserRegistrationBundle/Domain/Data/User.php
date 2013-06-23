@@ -26,7 +26,7 @@ class User
     /**
      * @var string
      *
-     * @Assert\NotBlank(message="必須項目です。", groups={"registration"})
+     * @Assert\NotBlank(message="入力してください。", groups={"registration"})
      * @Assert\MaxLength(limit=255, message="{{ limit }}文字以下で入力してください。", groups={"registraion"})
      * @ORM\Column(name="last_name", type="string", length=255)
      */
@@ -35,7 +35,7 @@ class User
     /**
      * @var string
      *
-     * @Assert\NotBlank(message="必須項目です。", groups={"registration"})
+     * @Assert\NotBlank(message="入力してください。", groups={"registration"})
      * @Assert\MaxLength(limit=255, message="{{ limit }}文字以下で入力してください。", groups={"registration"})
      * @ORM\Column(name="first_name", type="string", length=255)
      */
@@ -44,7 +44,7 @@ class User
     /**
      * @var string
      *
-     * @Assert\NotBlank(message="必須項目です。", groups={"registration"})
+     * @Assert\NotBlank(message="入力してください。", groups={"registration"})
      * @Assert\Email(message="メールアドレスが正しくありません。", groups={"registration"})
      * @ORM\Column(name="email", type="string", length=255)
      */
@@ -53,7 +53,7 @@ class User
     /**
      * @var string
      *
-     * @Assert\NotBlank(message="必須項目です。", groups={"registration"})
+     * @Assert\NotBlank(message="入力してください。", groups={"registration"})
      * @Assert\MaxLength(limit=255, message="{{ limit }}文字以下で入力してください。", groups={"registration"})
      * @ORM\Column(name="password", type="string", length=255)
      */
