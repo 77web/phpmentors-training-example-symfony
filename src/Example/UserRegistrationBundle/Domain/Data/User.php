@@ -3,6 +3,8 @@
 namespace Example\UserRegistrationBundle\Domain\Data;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -10,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="Example\UserRegistrationBundle\Domain\Data\Repository\UserRepository")
  * @ORM\HasLifeCycleCallbacks
+ * @UniqueEntity(fields="email", message="このメールアドレスは既に使われています。", groups={"registration"})
  */
 class User
 {
@@ -25,6 +28,8 @@ class User
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="入力してください。", groups={"registration"})
+     * @Assert\MaxLength(limit=255, message="{{ limit }}文字以下で入力してください。", groups={"registraion"})
      * @ORM\Column(name="last_name", type="string", length=255)
      */
     private $lastName;
@@ -32,6 +37,8 @@ class User
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="入力してください。", groups={"registration"})
+     * @Assert\MaxLength(limit=255, message="{{ limit }}文字以下で入力してください。", groups={"registration"})
      * @ORM\Column(name="first_name", type="string", length=255)
      */
     private $firstName;
@@ -39,6 +46,8 @@ class User
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="入力してください。", groups={"registration"})
+     * @Assert\Email(message="メールアドレスが正しくありません。", groups={"registration"})
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
@@ -46,6 +55,8 @@ class User
     /**
      * @var string
      *
+     * @Assert\NotBlank(message="入力してください。", groups={"registration"})
+     * @Assert\MaxLength(limit=255, message="{{ limit }}文字以下で入力してください。", groups={"registration"})
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
