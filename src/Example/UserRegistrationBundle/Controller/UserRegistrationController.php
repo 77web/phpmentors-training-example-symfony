@@ -6,12 +6,14 @@ use Example\UserRegistrationBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 
 class UserRegistrationController extends Controller
 {
     /**
      * @Route("/", name="register")
+     * @Method("GET")
      * @Template("ExampleUserRegistrationBundle:UserRegistration:registration_input.html.twig")
      */
     public function indexAction()
@@ -25,6 +27,7 @@ class UserRegistrationController extends Controller
 
     /**
      * @Route("/post", name="register_post")
+     * @Method("POST")
      * @Template("ExampleUserRegistrationBundle:UserRegistration:registration_input.html.twig")
      * @param Request $request
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
@@ -48,6 +51,7 @@ class UserRegistrationController extends Controller
 
     /**
      * @Route("/confirm", name="register_confirm")
+     * @Method("GET")
      * @Template("ExampleUserRegistrationBundle:UserRegistration:registration_confirmation.html.twig")
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -67,6 +71,7 @@ class UserRegistrationController extends Controller
 
     /**
      * @Route("/do", name="register_do")
+     * @Method("POST")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -89,6 +94,7 @@ class UserRegistrationController extends Controller
 
     /**
      * @Route("/success", name="register_success")
+     * @Method("GET")
      * @Template("ExampleUserRegistrationBundle:UserRegistration:registration_success.html.twig")
      * @return array
      */
